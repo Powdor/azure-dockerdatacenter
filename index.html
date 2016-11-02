@@ -1,0 +1,172 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Azure-dockerdatacenter by Azure</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Azure-dockerdatacenter</h1>
+        <p>Azure Docker DataCenter Templates for the to-be GAed Docker DataCenter with  ucp:2.0.0-Beta3 (native Swarm with Raft) and dtr:2.1.0-Beta3 Azure initially based on the &quot;legacy&quot; Docker DataCenter 1.x Azure MarketPlace Gallery Templates (1.0.9).</p>
+
+        <p class="view"><a href="https://github.com/Azure/azure-dockerdatacenter">View the Project on GitHub <small>Azure/azure-dockerdatacenter</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/Azure/azure-dockerdatacenter/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/Azure/azure-dockerdatacenter/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/Azure/azure-dockerdatacenter">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="table-of-contents" class="anchor" href="#table-of-contents" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Table of Contents</h1>
+
+<ul>
+<li>
+<a href="#azure-docker-datacenter">Azure Docker Datacenter</a>
+
+<ul>
+<li><a href="#deploy-and-visualize">Deploy and Visualize</a></li>
+<li>
+<a href="#topologies">Topologies</a>
+
+<ul>
+<li><a href="#the-minimal-topology-minimum-3-worker-manager-nodes-for-valid-raft-ha-and-minimum-2-worker-nodes-with-2-extra-for-dtr-and-replica">The Minimal Topology (Minimum 3 Worker Manager Nodes for valid Raft HA and minimum 2 worker nodes with 2 extra for DTR and Replica)</a></li>
+</ul>
+</li>
+<li><a href="#reporting-bugs">Reporting bugs</a></li>
+<li><a href="#patches-and-pull-requests">Patches and pull requests</a></li>
+<li><a href="#pre-req-and-or-optional"><del>Pre-Req and or</del> Optional</a></li>
+</ul>
+</li>
+</ul>
+
+<h1>
+<a id="azure-docker-datacenter" class="anchor" href="#azure-docker-datacenter" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Azure Docker Datacenter</h1>
+
+<ul>
+<li>Azure Docker DataCenter Templates for the to-be GAed Docker DataCenter with  <strong>ucp:2.0.0-Beta3</strong> (native Swarm with Raft) and <strong>dtr:2.1.0-Beta3</strong> initially based on the "legacy" Docker DataCenter 1.x Azure MarketPlace Gallery Templates (1.0.9). </li>
+<li>For Raft, please view <a href="http://events.linuxfoundation.org/sites/events/files/slides/Docker_Orchestration-Aaron_Lehmann.pdf">Docker Orchestration: Beyond the Basics</a> By Aaron Lehmann at the <a href="http://events.linuxfoundation.org/events/containercon-europe/program/slides">ContainerCon, Europe</a> - Berlin, October 4-9, 2016.</li>
+<li> Apps may leverage <a href="https://docs.docker.com/engine/swarm/">swarm mode orchestration on engine 1.12</a>.</li>
+<li>Please see the <a href="https://github.com/Azure/azure-dockerdatacenter/blob/master/LICENSE">LICENSE file</a> for licensing information. 
+
+<ul>
+<li>Docker DataCenter License as used as-is (<del>parameterized or</del> to be uploaded license - lic file) in this project for UCP 2.0.0 Beta3 and DTR 2.1.0 Beta3 can only be obtained presently for the private beta. Please refer to <a href="https://forums.docker.com/t/docker-datacenter-on-engine-1-12-private-beta/23232/1">this post</a> in the docker forum. Please sign up <a href="https://goo.gl/UTG895">here</a> for GA Waiting list.</li>
+</ul>
+</li>
+<li>This project has adopted the <a href="https://opensource.microsoft.com/codeofconduct/">Microsoft Open Source Code of Conduct</a>. For more information, see the <a href="https://opensource.microsoft.com/codeofconduct/faq/">Code of Conduct FAQ</a> or contact <a href="mailto:opencode@microsoft.com">opencode@microsoft.com</a> with any additional questions or comments.</li>
+<li>This project is hosted at: <a href="https://github.com/Azure/azure-dockerdatacenter">https://github.com/Azure/azure-dockerdatacenter</a>
+</li>
+<li>
+<strong>This repo is initially based on the "legacy" <a href="https://gallery.azure.com/artifact/20151001/docker.dockerdatacenterdocker-datacenter.1.0.9/Artifacts/mainTemplate.json">Docker DataCenter 1.x Azure MarketPlace Gallery Templates (1.0.9)</a></strong>
+
+<ul>
+<li>
+<strong>Uses the 14.04 LTS Images as per docker MarketPlace offer for the above</strong>.</li>
+</ul>
+</li>
+<li><strong>Uses the new public tar.gz from <del><a href="https://packages.docker.com/caas/ucp-2.0.0-beta1_dtr-2.1.0-beta1.tar.gz">here</a></del> <del><a href="https://s3.amazonaws.com/packages.docker.com/caas/ucp-2.0.0-beta3_dtr-2.1.0-beta3.tar.gz">here</a></del> <a href="https://packages.docker.com/caas/ucp-2.0.0-beta3_dtr-2.1.0-beta3.tar.gz">here</a> for changes using the Raft Protocol and Auto HA for private beta (to be GAed DDC) and native swarm mode orchestration on MS Azure. DDC Private Beta docs are <a href="https://beta.docker.com/docs/ddc">here</a></strong></li>
+<li>New <a href="https://github.com/Azure/custom-script-extension-linux">Go-based Linux CustomScript Extension being used</a> </li>
+<li>Uses the <a href="https://github.com/Microsoft/OMS-Agent-for-Linux/releases">Docker CS 1.12 Engine support for OMS Linux Agents</a>
+</li>
+<li>Latest <a href="https://github.com/docker/machine/releases">docker-compose</a> and <a href="https://github.com/docker/machine/releases">docker-machine</a> available.</li>
+<li>Dashboard URL
+
+<ul>
+<li>http://{{UCP Controller Nodes LoadBalancer Full DNS IP name}}.{{region of the Resource Group}}.cloudapp.azure.com
+
+<ul>
+<li>The Above is the FQDN of the LBR or Public IP for UCP Controller or Managers</li>
+</ul>
+</li>
+<li>http://{{DTR worker Nodes LoadBalancer Full DNS IP name}}.{{region of the Resource Group}}.cloudapp.azure.com
+
+<ul>
+<li>The Above is the FQDN of the LBR or Public IP for DTR</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>All passwords have been disabled in the nodes and one can only use public rsa_id to ssh to the nodes.</li>
+</ul>
+
+<h2>
+<a id="deploy-and-visualize" class="anchor" href="#deploy-and-visualize" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Deploy and Visualize</h2>
+
+<p><a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-dockerdatacenter%2Fmaster%2Fazuredeploy.json"><img alt="Deploy to Azure" src="http://azuredeploy.net/deploybutton.png"></a></p>
+
+<p><a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-dockerdatacenter%2Fmaster%2Fazuredeploy.json">  <img src="http://armviz.io/visualizebutton.png"> </a> </p>
+
+<h2>
+<a id="topologies" class="anchor" href="#topologies" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Topologies</h2>
+
+<p>A Minimal Fresh topology with minimum 3 Worker Managers, minimum 2 worker nodes, one DTR with local storage and another as replica would look like the following</p>
+
+<p><img src="https://raw.githubusercontent.com/Azure/azure-dockerdatacenter/master/MinimalFresh1.png" alt="Azure DDC Miminal Topology"></p>
+
+<h3>
+<a id="the-minimal-topology-minimum-3-worker-manager-nodes-for-valid-raft-ha-and-minimum-2-worker-nodes-with-2-extra-for-dtr-and-replica" class="anchor" href="#the-minimal-topology-minimum-3-worker-manager-nodes-for-valid-raft-ha-and-minimum-2-worker-nodes-with-2-extra-for-dtr-and-replica" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>The Minimal Topology (Minimum 3 Worker Manager Nodes for valid Raft HA and minimum 2 worker nodes with 2 extra for DTR and Replica)</h3>
+
+<p>As from <a href="https://resources.azure.com">https://resources.azure.com</a> </p>
+
+<p><img src="https://raw.githubusercontent.com/Azure/azure-dockerdatacenter/master/MinimalTopology.png" width="416" height="800"></p>
+
+<h2>
+<a id="reporting-bugs" class="anchor" href="#reporting-bugs" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Reporting bugs</h2>
+
+<p>Please report bugs  by opening an issue in the <a href="https://github.com/Azure/azure-dockerdatacenter/issues">GitHub Issue Tracker</a></p>
+
+<h2>
+<a id="patches-and-pull-requests" class="anchor" href="#patches-and-pull-requests" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Patches and pull requests</h2>
+
+<p>Patches can be submitted as GitHub pull requests. If using GitHub please make sure your branch applies to the current master as a 'fast forward' merge (i.e. without creating a merge commit). Use the <code>git rebase</code> command to update your branch to the current master if necessary.</p>
+
+<h2>
+<a id="pre-req-and-or-optional" class="anchor" href="#pre-req-and-or-optional" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><del>Pre-Req and or</del> Optional</h2>
+
+<p><strong>OMS Setup is optional and the OMS Workspace Id and OMS Workspace Key can either be kept blank or populated post the steps below.</strong></p>
+
+<p><a href="https://login.mms.microsoft.com/signin.aspx?signUp=on&amp;ref=ms_mms">Create a free account for MS Azure Operational Management Suite with workspaceName</a></p>
+
+<ul>
+<li>Provide a Name for the OMS Workspace.</li>
+<li>Link your Subscription to the OMS Portal.</li>
+<li>Depending upon the region, a Resource Group would be created in the Sunscription like "mms-weu" for "West Europe" and the named OMS Workspace with portal details etc. would be created in the Resource Group.</li>
+<li>Logon to the OMS Workspace and Go to -&gt; Settings -&gt; "Connected Sources"  -&gt; "Linux Servers" -&gt; Obtain the Workspace ID like <code>ba1e3f33-648d-40a1-9c70-3d8920834669</code> and the "Primary and/or Secondary Key" like <code>xkifyDr2s4L964a/Skq58ItA/M1aMnmumxmgdYliYcC2IPHBPphJgmPQrKsukSXGWtbrgkV2j1nHmU0j8I8vVQ==</code>
+</li>
+<li>Add The solutions "Agent Health", "Activity Log Analytics" and "Container" Solutions from the "Solutions Gallery" of the OMS Portal of the workspace.</li>
+<li>While Deploying the DDC Template just the WorkspaceID and the Key are to be mentioned and all will be registered including all containers in any nodes of the DDC auto cluster.</li>
+<li>
+<p>Then one can login to <a href="https://OMSWorkspaceName.portal.mms.microsoft.com">https://OMSWorkspaceName.portal.mms.microsoft.com</a> and check all containers running for Docker DataCenter and use Log Analytics and if Required perform automated backups using the corresponding Solutions for OMS.</p>
+
+<ul>
+<li>Or if the OMS Workspace and the Machines are in the same subscription, one can just connect the Linux Node sources manually to the OMS Workspace as Data Sources</li>
+<li>New nodes to be added to the cluster as worker needs to follow the <a href="https://github.com/Microsoft/OMS-Agent-for-Linux/blob/master/docs/Docker-Instructions.md">Docker Instructions for OMS</a> manually.</li>
+</ul>
+</li>
+<li><p>All Docker Engines in this Azure DDC autocluster(s) are automatically instrumented via ExecStart and Specific DOCKER_OPTIONS to share metric with the OMS Workspace during deployment as in the picture below.</p></li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/Azure/azure-dockerdatacenter/master/OMSContainer.png" alt="OMS Container"></p>
+
+<p><g-emoji alias="heart" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/2764.png" ios-version="6.0">❤️</g-emoji> <img src="https://raw.githubusercontent.com/Azure/azure-dockerdatacenter/master/Azure.png" alt="Azure Subscription Icon"> <g-emoji alias="penguin" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f427.png" ios-version="6.0">🐧</g-emoji> <g-emoji alias="whale" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f433.png" ios-version="6.0">🐳</g-emoji></p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/Azure">Azure</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
